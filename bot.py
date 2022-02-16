@@ -253,6 +253,7 @@ def show_help( update, context ):
     img( update, "https://cdn.nerdschalk.com/wp-content/uploads/2022/01/002-9.png" )
 
     txt     = "Your score on the leaderboard is the average of all your games. "
+    txt    += "The lower the score, the better. "
     txt    += f"If you fail to guess the word of the day, you get { FAIL } points of penalty. "
     txt    += f"For everyday you play, you get { DAY_BONUS } points of bonus."
     msg( update, txt )
