@@ -195,7 +195,7 @@ def show_lead( update, context ):
         lead_dict[ user ]   = get_score( user )
 
     # sort the leaderboard
-    sorting     = lambda x: ( x[ 1 ], x[ 0 ] )
+    sorting     = lambda x: ( x[ 1 ], x[ 0 ].lower() )
     lead_list   = [ ( k, v ) for k, v in sorted( lead_dict.items(), key=sorting ) ]
 
     # print the leaderboard
