@@ -3,9 +3,6 @@
 
     Alice Feb 2022   ~   Bot Telegram for Wordle Leaderboard
 
-    The bot handles the cookie choices, making sure that more persons can't propose the same cookie.
-    The list of cookies remains hidden to all partecipants. Note that the bot works locally only.
-
 #####################################################################################################################
 """
 
