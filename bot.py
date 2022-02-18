@@ -93,7 +93,7 @@ def get_score( user ):
     if n > 0:
         s    = sum( score_dict[ user ].values() ) / n
         s   -= DAY_BONUS * n
-        return s
+        return round( s, 2 )
     return None
 
 
