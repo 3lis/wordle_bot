@@ -156,7 +156,7 @@ def save_score( update, context ):
 
     if day in score_dict[ user ]:
         txt     = f"ERROR: @{ user } has already played this day."
-        msg( update, txt )
+        msg( update, txt, parse=None )
         return
 
     add_score( user, day, score )
@@ -174,7 +174,7 @@ def save_score( update, context ):
         else:       print( f">>> { user } saved score { score } for day { day }" )
 
     txt     = f"Saved @{ user } score of the day."
-    msg( update, txt )
+    msg( update, txt, parse=None )
 
 
 
