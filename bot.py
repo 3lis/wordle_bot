@@ -208,18 +208,52 @@ def save_score( update, context ):
 
 
 
-def show_lead( update, context ):
+def show_day_lead( update, context ):
     """ -------------------------------------------------------------------------------------------------------------
-    Show the leaderboard
+    Show the leaderboard of the day
     ------------------------------------------------------------------------------------------------------------- """
-    set_last_day()
-
     if len( score_dict ) == 0:
         txt     = "No users have played yet."
         msg( update, txt )
         return
 
-    txt         = "\U0001F3C6 LEADERBOARD\n\n"
+    txt         = f"\U0001F4C5 LEADERBOARD OF DAY { last_day }\n\n"
+    lead_dict   = dict()
+
+    # get users scores
+    for user in score_dict:
+        if last_day in score_dict[ user ]:
+            lead_dict[ user ]   = score_dict[ user ][ last_day ]
+
+    # sort the leaderboard
+    sorting     = lambda x: ( x[ 1 ], x[ 0 ].lower() )
+    lead_list   = [ ( k, v ) for k, v in sorted( lead_dict.items(), key=sorting ) ]
+
+    # print the leaderboard
+    for r, ( u, s ) in enumerate( lead_list, 1 ):
+        if r == 1:
+            medal   = "\U0001F947 "
+        elif r == 2:
+            medal   = "\U0001F948 "
+        elif r == 3:
+            medal   = "\U0001F949 "
+        else:
+            medal   = ''
+        txt     += f"{ r }. { medal }@{ u } ({ s })\n"
+    msg( update, txt, parse=None )
+
+
+
+def show_avg_lead( update, context ):
+    """ -------------------------------------------------------------------------------------------------------------
+    Show the average leaderboard
+    ------------------------------------------------------------------------------------------------------------- """
+    if len( score_dict ) == 0:
+        txt     = "No users have played yet."
+        msg( update, txt )
+        return
+
+    txt         = "\U0001F3C6 GLOBAL LEADERBOARD\n\n"
     lead_dict   = dict()
 
     # get users scores
@@ -240,8 +274,18 @@ def show_lead( update, context ):
             medal   = "\U0001F949 "
         else:
             medal   = ''
-        txt     += f"{ r }. @{ u } { medal }({ s }) [{ len( score_dict[ u ] ) }]\n"
+        txt     += f"{ r }. { medal }@{ u } ({ s }) [{ len( score_dict[ u ] ) }]\n"
     msg( update, txt, parse=None )
+
+
+
+def show_leads( update, context ):
+    """ -------------------------------------------------------------------------------------------------------------
+    Show the leaderboards
+    ------------------------------------------------------------------------------------------------------------- """
+    set_last_day()
+    show_day_lead( update, context )
+    show_avg_lead( update, context )
 
 
 
@@ -321,7 +365,7 @@ def main():
 
     handl_start     = CommandHandler( 'start', start_conv )
     handl_mess      = MessageHandler( filter_mess, save_score )
-    handl_lead      = CommandHandler( 'leaderboard', show_lead )
+    handl_lead      = CommandHandler( 'leaderboard', show_leads )
     handl_stats     = CommandHandler( 'stats', show_stats )
     handl_help      = CommandHandler( 'help', show_help )
 
