@@ -191,8 +191,8 @@ def save_score( update, context ):
 
     if score == 'X':
         score   = FAIL_s
-    elif int( score ) == 1:                     # to prevent Gastone from cheating
-        txt     = f"GASTONE SMETTILA"
+    elif ( int( score ) == 1 ) and ( user == 'tonegas' ):      # prevent Gastone from cheating
+        txt     = f"GASTONE PIETRO SMETTILA"
         msg( update, txt )
         return
     else:
