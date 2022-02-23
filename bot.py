@@ -249,6 +249,8 @@ def show_day_lead( update, context ):
             medal   = "\U0001F949 "
         else:
             medal   = ''
+        if u == 'halba':
+            medal   = medal + 'tiny '
         txt     += f"{ r }. { medal }@{ u } ({ s })\n"
     msg( update, txt, parse=None )
 
@@ -284,6 +286,8 @@ def show_avg_lead( update, context ):
             medal   = "\U0001F949 "
         else:
             medal   = ''
+        if u == 'halba':
+            medal   = medal + 'tiny '
         txt     += f"{ r }. { medal }@{ u } ({ s }) [{ len( score_dict[ u ] ) }]\n"
     msg( update, txt, parse=None )
 
