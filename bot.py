@@ -77,7 +77,7 @@ def check_user( user, update ):
     """ -------------------------------------------------------------------------------------------------------------
     Check if user has @username
     ------------------------------------------------------------------------------------------------------------- """
-    if user in ( None or 'None' ):
+    if user in ( None, 'None' ):
         txt     = "ERROR: you must have a Telegram username to play.\n"
         txt    += "You can set your username in the setting menu."
         msg( update, txt )
