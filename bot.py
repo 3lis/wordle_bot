@@ -22,6 +22,7 @@ TOKEN               = "5110592823:AAHt0lUu-BuE-5_z3XCDq1ZWEobvAiP5Ssc"  # unique
 LNAME               = "leaderboard.pickle"                              # pickle file to store the list of cookies
 ONAME               = "log.txt"                                         # log file
 
+CHEAT               = 10                                                # score for cheating the game
 MISS                = 8                                                 # score for not playing the day
 FAIL                = 7                                                 # score for not guessing the word
 FAIL_S              = 'FAIL'                                            # string for not guessing the word
@@ -281,6 +282,8 @@ def show_day_lead( update, context ):
             medal   = "\U0001F949 "
         else:
             medal   = ''
+        if u == 'pla_10':
+            medal   = "\U0001F4A9 "
         if u == 'halba':
             medal   = medal + 'tiny '
         txt     += f"{ r }. { medal }@{ u } ( { s } )\n"
@@ -300,7 +303,7 @@ def show_avg_lead( update, context ):
     # txt         = f"\U0001F3C6 GLOBAL LEADERBOARD\n"
     txt         = f"\U0001F3C6 GLOBAL LEADERBOARD ({ WINDOW }-days window)\n"
     # txt        += f"[ username | score | total games ]\n\n"
-    txt        += f"[ username | score | total games | games in last { WINDOW } days ]\n\n"
+    txt        += f"[ score | total games | games in last { WINDOW } days ]\n\n"
     lead_dict   = dict()
 
     # get users scores
@@ -325,6 +328,8 @@ def show_avg_lead( update, context ):
             medal   = "\U0001F949 "
         else:
             medal   = ''
+        if u == 'pla_10':
+            medal   = "\U0001F4A9 "
         if u == 'halba':
             medal   = medal + 'tiny '
         txt     += f"{ r }. { medal }@{ u } ( { s } ) [ { ntot } ] [ { nwin } ]\n"
