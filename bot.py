@@ -109,6 +109,21 @@ def add_score( user, day, score ):
     score_dict[ user ][ day ]    = score
 
 
+def get_score( user, day ):
+    """ -------------------------------------------------------------------------------------------------------------
+    Get user's score of day
+    ------------------------------------------------------------------------------------------------------------- """
+    if user not in score_dict:
+        return
+    if day not in score_dict[ user ]:
+        return
+
+    s   = score_dict[ user ][ day ]
+    if s == FAIL_S:
+        return FAIL
+    return s
+
+
 def get_avg_score( user ):
     """ -------------------------------------------------------------------------------------------------------------
     Get average score of user of all time
@@ -266,7 +281,7 @@ def show_day_lead( update, context ):
     # get users scores
     for user in score_dict:
         if last_day in score_dict[ user ]:
-            lead_dict[ user ]   = score_dict[ user ][ last_day ]
+            lead_dict[ user ]   = get_score( user, last_day )
 
     # sort the leaderboard
     sorting     = lambda x: ( x[ 1 ], x[ 0 ].lower() )
