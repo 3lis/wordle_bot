@@ -18,7 +18,7 @@ from telegram.ext   import ConversationHandler, PicklePersistence
 DEBUG               = True
 LOG                 = True
 
-TOKEN               = "5110592823:AAHDcl0a-GU7lZ7qztlKe_IiS93uUFc_uL0"  # unique bot ID
+TOKEN               = "5110592823:AAHuPKJW--N6O2Ev-LBoCT4cWx64gKR0yLA"  # unique bot ID
 LNAME               = "leaderboard.pickle"                              # pickle file to store the list of cookies
 ONAME               = "log.txt"                                         # log file
 
