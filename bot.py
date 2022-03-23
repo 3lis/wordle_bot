@@ -18,7 +18,7 @@ from telegram.ext   import ConversationHandler, PicklePersistence
 DEBUG               = True
 LOG                 = True
 
-TOKEN               = ""                                                # unique bot ID
+TOKEN               = "5110592823:AAHuPKJW--N6O2Ev-LBoCT4cWx64gKR0yLA"  # unique bot ID
 LNAME               = "leaderboard.pickle"                              # pickle file to store the list of cookies
 ONAME               = "log.txt"                                         # log file
 
@@ -298,7 +298,13 @@ def show_day_lead( update, context ):
         else:
             medal   = ''
         if u == 'pla_10':
-            medal   = "\U0001F4A9 "
+            medal   = medal + "\U0001F4A9 "
+        if u == 'aliceplebe':
+            medal   = medal + "\U0001F984 "
+        if u == 'aleanticocal':
+            medal   = medal + "\U0001F420 "
+        if u == 'tittachem':
+            medal   = medal + "\U0001F9A9 "
         if u == 'halba':
             medal   = medal + 'tiny '
         txt     += f"{ r }. { medal }@{ u } ( { s } )\n"
@@ -344,7 +350,13 @@ def show_avg_lead( update, context ):
         else:
             medal   = ''
         if u == 'pla_10':
-            medal   = "\U0001F4A9 "
+            medal   = medal + "\U0001F4A9 "
+        if u == 'aliceplebe':
+            medal   = medal + "\U0001F984 "
+        if u == 'aleanticocal':
+            medal   = medal + "\U0001F420 "
+        if u == 'tittachem':
+            medal   = medal + "\U0001F9A9 "
         if u == 'halba':
             medal   = medal + 'tiny '
         txt     += f"{ r }. { medal }@{ u } ( { s } ) [ { ntot } ] [ { nwin } ]\n"
