@@ -18,7 +18,7 @@ from telegram.ext   import ConversationHandler, PicklePersistence
 DEBUG               = True
 LOG                 = True
 
-TOKEN               = ""  # unique bot ID
+TOKEN               = None                                              # unique bot ID
 LNAME               = "leaderboard.pickle"                              # pickle file to store the list of cookies
 ONAME               = "log.txt"                                         # log file
 
@@ -49,6 +49,7 @@ last_day            = 0                                                 # last d
 #   - add_user
 #   - add_score
 #   - get_score
+#   - badge
 #
 # ===================================================================================================================
 
@@ -458,6 +459,9 @@ def show_help( update, context ):
 
 def main():
     global score_dict
+
+    with open( "TOKEN.txt", 'r' ) as f:
+        TOKEN = f.read()
 
     if LOG:
         with open( ONAME, 'w' ) as olog:
