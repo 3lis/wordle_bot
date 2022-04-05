@@ -2,4 +2,5 @@
 log.txt
 *.pickle
 misc/
+__pycache__/
 TOKEN.txt

@@ -195,8 +195,8 @@ def badge( user ):
     elif user == 'el1_4':
         b   = "\U0001F338 "
     elif user == 'il_place':
-        # b   = "\U0001F417 "
-        b   = "\U0001F4CD "
+        b   = "\U0001F417 "
+        # b   = "\U0001F4CD "
     elif user == 'riccardobertollo':
         b   = "\U0001F914 "
     elif user == 'alexrookie':
@@ -416,14 +416,21 @@ def show_stats( update, context ):
     n_day   = len( score_dict[ user ] )
 
     txt     = "\U0001F4CA YOUR STATS\n\n"
-    txt    += f"You played { n_day } game(s)\n"
+    txt    += f"You played { n_day } game(s)\n\n"
     txt    += f"You guessed in *1* move { val.count( 1 ) } time(s)\n"
     txt    += f"You guessed in *2* moves { val.count( 2 ) } time(s)\n"
     txt    += f"You guessed in *3* moves { val.count( 3 ) } time(s)\n"
     txt    += f"You guessed in *4* moves { val.count( 4 ) } time(s)\n"
     txt    += f"You guessed in *5* moves { val.count( 5 ) } time(s)\n"
     txt    += f"You guessed in *6* moves { val.count( 6 ) } time(s)\n"
-    txt    += f"You failed { val.count( FAIL_S ) } time(s)\n"
+    txt    += f"You failed { val.count( FAIL_S ) } time(s)\n\n"
+
+    last_days   = sorted( score_dict[ user ], reverse=True )[ :WINDOW ]
+
+    txt    += f"Your score in the last { WINDOW } days\n"
+    txt    += f"{ score_dict[ user ][ last_days[ 0 ] ] }"
+    for d in last_days[ 1: ]:
+        txt     += f" - { score_dict[ user ][ d ] }"
     msg( update, txt )
 
 
