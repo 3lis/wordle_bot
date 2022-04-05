@@ -106,9 +106,6 @@ def add_score( user, day, score ):
     assert isinstance( day, int )
     assert ( isinstance( score, int ) ) or ( score == FAIL_S )
 
-    # if score == FAIL_S:
-    #     score = FAIL
-
     score_dict[ user ][ day ]    = score
 
 
@@ -124,6 +121,10 @@ def get_score( user, day ):
     s   = score_dict[ user ][ day ]
     if s == FAIL_S:
         return FAIL
+    if s == MISS_S:
+        return MISS
+    if s == CHEAT_S:
+        return CHEAT
     return s
 
 
@@ -166,9 +167,7 @@ def get_lim_score( user ):
 
         for w, d in zip( wgts, days ):
             if d in score_dict[ user ]:                 # if user played
-                s       = score_dict[ user ][ d ]
-                if s == FAIL_S:                         # if user failed
-                    s   = FAIL
+                s       = get_score( user, d )
                 l.append( w * s )
             else:                                       # if user didn't play
                 l.append( w * MISS )
@@ -428,9 +427,9 @@ def show_stats( update, context ):
     last_days   = sorted( score_dict[ user ], reverse=True )[ :WINDOW ]
 
     txt    += f"Your score in the last { WINDOW } days\n"
-    txt    += f"{ score_dict[ user ][ last_days[ 0 ] ] }"
+    txt    += f"{ get_score( user, last_days[ 0 ] ) }"
     for d in last_days[ 1: ]:
-        txt     += f" - { score_dict[ user ][ d ] }"
+        txt     += f" - { get_score( user, d ) }"
     msg( update, txt )
 
 
@@ -453,7 +452,8 @@ def show_help( update, context ):
     txt     = f"Your score on the leaderboard is the linearly weighted average of your games in the last { WINDOW } days. "
     txt    += "The lower the score, the better. "
     txt    += f"If you fail to guess the word of the day, you get a score of { FAIL }. "
-    txt    += f"For everyday you don't play since you started, you get a score of { MISS }."
+    txt    += f"For everyday you don't play since you started, you get a score of { MISS }. "
+    txt    += f"If you get caught cheating, you get a score of { CHEAT }!"
     msg( update, txt )
 
 
