@@ -23,7 +23,9 @@ LNAME               = "leaderboard.pickle"                              # pickle
 ONAME               = "log.txt"                                         # log file
 
 CHEAT               = 10                                                # score for cheating the game
+CHEAT_S             = 'CHEAT'
 MISS                = 8                                                 # score for not playing the day
+MISS_S              = 'MISS'
 FAIL                = 7                                                 # score for not guessing the word
 FAIL_S              = 'FAIL'                                            # string for not guessing the word
 DAY_MALUS           = 0.20                                              # malus weight for not playing a day
@@ -175,6 +177,42 @@ def get_lim_score( user ):
     return None
 
 
+def badge( user ):
+    """ -------------------------------------------------------------------------------------------------------------
+    Add emoji badge to user
+    ------------------------------------------------------------------------------------------------------------- """
+    if user == 'pla_10':
+        b   = "\U0001F4A9 "
+    elif user == 'aliceplebe':
+        b   = "\U0001F984 "
+    elif user == 'aleanticocal':
+        b   = "\U0001F420 "
+    elif user == 'tittachem':
+        b   = "\U0001F9A9 "
+    elif user == 'MatteoLarcher':
+        b   = "\U0001F412 "
+    elif user == 'el1_4':
+        b   = "\U0001F338 "
+    elif user == 'il_place':
+        # b   = "\U0001F417 "
+        b   = "\U0001F4CD "
+    elif user == 'riccardobertollo':
+        b   = "\U0001F914 "
+    elif user == 'alexrookie':
+        b   = "\U0001F36A "
+    elif user == 'LegDav':
+        b   = "\U0001F47B "
+    elif user == 'angelovalente':
+        b   = "\U0001F47C "
+    elif user == 'elpago93':
+        b   = "\U0001F3CE "
+    elif user == 'halba':
+        b   = 'tiny '
+    else:
+        b   = ''
+    return b
+
+
 
 # ===================================================================================================================
 #
@@ -289,24 +327,15 @@ def show_day_lead( update, context ):
 
     # print the leaderboard
     for r, ( u, s ) in enumerate( lead_list, 1 ):
-        if r == 1:
-            medal   = "\U0001F947 "
-        elif r == 2:
-            medal   = "\U0001F948 "
-        elif r == 3:
-            medal   = "\U0001F949 "
-        else:
-            medal   = ''
-        if u == 'pla_10':
-            medal   = medal + "\U0001F4A9 "
-        if u == 'aliceplebe':
-            medal   = medal + "\U0001F984 "
-        if u == 'aleanticocal':
-            medal   = medal + "\U0001F420 "
-        if u == 'tittachem':
-            medal   = medal + "\U0001F9A9 "
-        if u == 'halba':
-            medal   = medal + 'tiny '
+        # if r == 1:
+        #     medal   = "\U0001F947 "
+        # elif r == 2:
+        #     medal   = "\U0001F948 "
+        # elif r == 3:
+        #     medal   = "\U0001F949 "
+        # else:
+        #     medal   = ''
+        medal   = badge( u )
         txt     += f"{ r }. { medal }@{ u } ( { s } )\n"
     msg( update, txt, parse=None )
 
@@ -341,24 +370,18 @@ def show_avg_lead( update, context ):
         ntot    = len( score_dict[ u ] )
         nwin    = len( [ d for d in score_dict[ u ] if d >= last_day - WINDOW + 1 ] )
 
-        if r == 1:
-            medal   = "\U0001F947 "
-        elif r == 2:
-            medal   = "\U0001F948 "
-        elif r == 3:
-            medal   = "\U0001F949 "
-        else:
-            medal   = ''
-        if u == 'pla_10':
-            medal   = medal + "\U0001F4A9 "
-        if u == 'aliceplebe':
-            medal   = medal + "\U0001F984 "
-        if u == 'aleanticocal':
-            medal   = medal + "\U0001F420 "
-        if u == 'tittachem':
-            medal   = medal + "\U0001F9A9 "
-        if u == 'halba':
-            medal   = medal + 'tiny '
+        if nwin == 0:
+            continue
+
+        # if r == 1:
+        #     medal   = "\U0001F947 "
+        # elif r == 2:
+        #     medal   = "\U0001F948 "
+        # elif r == 3:
+        #     medal   = "\U0001F949 "
+        # else:
+        #     medal   = ''
+        medal   = badge( u )
         txt     += f"{ r }. { medal }@{ u } ( { s } ) [ { ntot } ] [ { nwin } ]\n"
     msg( update, txt, parse=None )
 
