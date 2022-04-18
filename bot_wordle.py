@@ -395,6 +395,12 @@ def show_leads( update, context ):
     show_day_lead( update, context )
     show_avg_lead( update, context )
 
+    # ads
+    txt     = "\U0001F6A8 New bots now available! \U0001F6A8\n"
+    txt    += "Leaderboard for Heardle \U0001F3B6 https://t.me/make_heardle_bot\n"
+    txt    += "Leaderboard for Framed \U0001F3AC https://t.me/make_framed_bot\n"
+    msg( update, txt, parse=None )
+
 
 
 def show_stats( update, context ):
